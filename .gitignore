@@ -1,0 +1,14 @@
+# Node.js / JavaScript
+node_modules/
+dist/
+*.log
+
+# Python remnants
+.venv/
+__pycache__/
+*.pyc
+page.py
+
+# OS / editor junk
+.DS_Store
+Thumbs.db

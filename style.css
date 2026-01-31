@@ -1,0 +1,70 @@
+body {
+    background-color : #35383b;
+}
+
+#i1 {
+    background-color: #474a4e;
+    border-radius : 5px;
+    position : fixed;
+    width : 750px;
+    height : 100%;
+    right: 25%;
+}
+
+#pre {
+    color : #e3be17;
+    padding-top: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    height: 84%;
+    overflow-y: auto;
+    font-family:  Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    scrollbar-width: auto;
+    scrollbar-color: #e3be17 #474a4e ;
+}
+
+#outertxtarea {
+    position : absolute;
+    border-width: 20px 10px 20px 10px;
+    background-color: #35383b;
+    border-style: solid;
+    border-color: #35383b;
+    bottom : 2%;
+    left :7.4%;
+    width : 84%;
+    border-radius: 20px;
+    outline-width: 3px;
+    outline-style: solid;
+    outline-color: #4f5459;
+}
+
+#autoExpand {
+    position : static;
+    width: 99%;
+    color:white;
+    background-color:transparent;
+    height : 22px;
+    font-size: small;
+    font-family:sans-serif;
+    font-weight: 10;
+    border-style: hidden;
+    max-height: 400px;
+    scrollbar-color: transparent transparent;
+    /*
+    outline : 3px;
+    overflow:hidden; #Scrollbar not working
+    outline-style: solid;
+    outline-color: #90865d;
+    */
+}
+
+/* The whole scrollbar */
+#pre::-webkit-scrollbar-thumb:hover {
+  background: #a78c11;             
+} 
+
+#autoExpand:focus {
+    outline:none;
+}
+
