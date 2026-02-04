@@ -115,7 +115,7 @@ function pattern(text,arr) {
                     arr[le].splice(0,0,text);
                 }
             } else{
-                if (i%2==0){arr[le].splice(0,0,"｜")}
+                if (i%2==0){arr[le].splice(0,0,"|")}
                 else {arr[le].splice(0,0,"   ")};
             }
         } else {
@@ -128,7 +128,7 @@ function pattern(text,arr) {
     }
     previous_lvl = current_lvl;
     if (arr.length>2){arr.shift()};
-    console.table(arr)
+    console.log(arr)
 }
 
 function forceDisplay(arr) {
