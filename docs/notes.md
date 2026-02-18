@@ -11,7 +11,7 @@ tree diagram me improvements , its not working as expected right now
 ## Issue
 jab like sb kuch delete kr dete ho then enter dabaoge then its not giving you a single '|' , probably cause level was not updated properly
 
-## Issue
+## Issue (fixed)
 You shouldn't be able to go more than 1 level deep agar tumne koi entry nhi ki h to , mtlb ki like you can't press right arrow twice and wo tumhe two levels deep le jaaye , har level me ghusne ke baad tumhe entry krni hi padegi if you want to move more deeper
 
 ## Issue
@@ -41,3 +41,31 @@ doesn't look like a tree after I changed the font , tree break ho rha h
  - Whether the user wants a different kind of input like umm latex like , mtlb ki there will be two displays one is a text page like area , jese notepad me likhte ho , the other one is uhh the rendered tree form
 
 5. A chat bot which you can talk with and ask questions regarding how to use this webapp
+
+## Issue
+strange behavior after 
+hi
+->
+how
+enter
+
+Improve display functionality , ab ye ptani structure kyuni maintain ho rha at level 1 
+"Fixed another problem emnanting from this example ( stems not being displayed)"
+hi
+->
+how
+->
+is
+->
+it
+going
+<-
+for
+<-
+you
+
+# Improve github repo
+- Add readme in github
+- Update folder structure
+- add a branch to which you will be updating most of your changes in github
+- Remove this file completely and add everything in this file to the issues section and work there only

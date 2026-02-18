@@ -7,6 +7,8 @@ let change = false;
 let arr = [];
 let search_for = '#';
 let hold = false;
+let manipulate = false;
+let constraint1 = 0;
 
 textarea.addEventListener("input",function() {
     this.style.height = "auto";
@@ -20,12 +22,20 @@ textarea.addEventListener("keydown", function() {
             del();
         }
     }
+    hold = false;
     if (event.key==='Enter' && !event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+        constraint1 = 0;
         let hold_my_text = cchecker(this.value);
         this.value = '' ;
         pattern(hold_my_text,arr);
         correctArr(arr);
-        change ? forceDisplay(arr) : display(arr) ;
+        change ? (() => {forceDisplay(arr);change = false;})() :
+            (() =>{
+                manipulate ? (() => {
+                displayFromArray();
+                manipulate=false;})()
+                : display(arr)
+            })()
     } else if (event.key==='ArrowRight') {
         lvlManager(1);
     } else if (event.key==='ArrowLeft') {
@@ -39,17 +49,24 @@ textarea.addEventListener("keydown", function() {
 function correctArr(arr) {
     le = arr.length-1;
     lee = arr[le].length-1;
+    console.log(arr);
     arr[le].splice(lee,1,arr[le][lee].replace('\n',''));
     arr[le].splice(0,1,'\n'+ arr[le][0]);
 }
 
 function lvlManager(plusOrMinus) {
     let num = plusOrMinus*1
-    if ( current_lvl > 1 ) {
-        current_lvl += num
-    } else if(current_lvl==1){
-        if (num > 0){
-            current_lvl += num
+    if (constraint1!=1) {
+        if ( current_lvl > 1 ) {
+            if (Math.abs(constraint1)<=1){
+            current_lvl += num;
+            constraint1 += num;
+            };
+        } else if(current_lvl==1){
+            if (num > 0){
+                current_lvl += num;
+                constraint1 += num;
+            }
         }
     }
 };
@@ -102,33 +119,35 @@ function pattern(text,arr) {
             if (i > tcols - 2) {
                 if (i%2==0) {
                     if (current_lvl - previous_lvl > 0){
-                        arr[le].splice(0,0,"├──")
+                        arr[le].splice(0,0,"└──");
                     } else if (current_lvl === previous_lvl){
-                        arr[le].splice(0,0,"├──")
-                    } else {
-                        lee = arr[le-1].length
-                        arr[le-1].splice(lee-2,1,"└──");
-                        arr[le].splice(0,0,"├──");
+                        lee = arr[le-1].length;
+                        arr[le-1].splice(lee-2,1,"├──");
+                        arr[le].splice(0,0,"└──");
                         change = true;
+                    } else {
+                        arr[le].splice(0,0,"└──");
+                        manipulate = true;
                     }
                 } else{
                     arr[le].splice(0,0,text);
                 }
             } else{
-                if (i%2==0){arr[le].splice(0,0,"|")}
+                if (i%2==0){arr[le].splice(0,0," ")}
                 else {arr[le].splice(0,0,"   ")};
             }
         } else {
             if (text!=''){
                 arr[le].splice(0,0,text)
             }else{
-                arr[le].splice(0,0,"｜")
+                arr[le].splice(0,0," ")
             }
         };
     }
     previous_lvl = current_lvl;
-    if (arr.length>2){arr.shift()};
-    console.log(arr)
+    if (manipulate){
+        manipulateArray();
+    };
 }
 
 function forceDisplay(arr) {
@@ -139,6 +158,7 @@ function forceDisplay(arr) {
         arr2.push(ele.join(''))
     }
     pre.innerText = lines.join('\n');
+    pre.innerText = '';
     pre.innerText += arr2.join('');
 
 }
@@ -152,4 +172,31 @@ function del() {
     let lines = pre.innerText.split("\n");
     lines = lines.slice(0,-1);
     pre.innerText = lines.join('\n');
+}
+
+function manipulateArray(){
+    let lee = arr[arr.length-1].length - 2;
+    let leee = arr.length-2; /* +ve index of second last element */
+    for (i = leee ; i>=0; i--){
+        if (arr[i][lee]===' ' || arr[i][lee]==='\n ') {
+            let z = arr[i][lee].trimEnd()+'|';
+            console.log(z);
+            console.log(i,lee);
+            arr[i].splice(lee,1,z);
+        } else {
+            arr[i].splice(lee,1,"├──")
+            break;
+        }
+    };
+    console.log(arr);
+}
+
+function displayFromArray() {
+    let myString = '';
+    let arr2 = [];
+    for (var ele of arr){
+        arr2.push(ele.join(''))
+    }
+    pre.innerText = '';
+    pre.innerText += arr2.join('');
 }
